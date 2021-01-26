@@ -9,9 +9,10 @@ interface Props {
   type?: AlertType;
   className?: string;
   message?: string;
+  onClick?: () => void;
 }
 
-export const Alert: React.FC<Props> = ({ type = 'success', message = '', className }) => {
+export const Alert: React.FC<Props> = ({ type = 'success', message = '', className, onClick }) => {
   const ref = React.useRef<null | HTMLDivElement>(null);
   const getHeader = document.getElementsByClassName('ebs-layout__top-bar');
 
@@ -32,7 +33,11 @@ export const Alert: React.FC<Props> = ({ type = 'success', message = '', classNa
   }, [message, getHeader]);
 
   return message.length ? (
-    <div ref={ref} className={cn(`ebs-alert`, `ebs-alert--${type}`, className)}>
+    <div
+      ref={ref}
+      className={cn(`ebs-alert`, `ebs-alert--${type}`, className, { 'ebs-alert--link': onClick })}
+      onClick={onClick}
+    >
       {renderByType[type]}
       {message}
     </div>
