@@ -36,19 +36,6 @@ export const Button: React.FC<ButtonProps> = ({
   block,
   ...props
 }) => {
-  const onClickHandler = React.useCallback(
-    (e) => {
-      if (stopPropagation) {
-        e.stopPropagation();
-      }
-
-      if (onClick) {
-        onClick();
-      }
-    },
-    [onClick],
-  );
-
   return (
     <div
       className={cn(
@@ -62,7 +49,7 @@ export const Button: React.FC<ButtonProps> = ({
           'ebs-button--icon': icon,
         },
       )}
-      onClick={onClickHandler}
+      onClick={onClick}
       role="presentation"
     >
       {prefix ? (
