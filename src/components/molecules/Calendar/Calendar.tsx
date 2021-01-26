@@ -1,7 +1,8 @@
 import * as React from 'react';
-import DatePicker from 'react-datepicker';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import * as translates from 'date-fns/locale';
 import cn from 'classnames';
-import { format, dateTimeFormat } from 'libs/date';
+import { format, dateTimeFormat, dateTimeFormatInput, dateFormatInput } from 'libs/date';
 import { Extra, Label } from 'components/atoms';
 
 import { DateState, LimitTimeState } from './Calendar.types';
@@ -17,6 +18,7 @@ interface Props {
   endPlaceholder?: string;
   className?: string;
   withTime?: boolean;
+  languages?: string[];
   onChange?: (values?: string | (string | undefined)[] | null) => void;
   minDate?: Date;
   locale?: string;
@@ -39,6 +41,7 @@ export const Calendar = React.forwardRef<any, Props>(
       startPlaceholder = '',
       endPlaceholder = '',
       iconAlign = 'right',
+      languages = [],
       className,
       withTime,
       onChange,
@@ -57,6 +60,14 @@ export const Calendar = React.forwardRef<any, Props>(
       to: null,
       date: null,
     });
+
+    const periodFormat = React.useMemo(() => (withTime ? dateTimeFormatInput : dateFormatInput), [withTime]);
+
+    React.useEffect(() => {
+      registerLocale('en', translates['enGB']);
+
+      languages.map((language) => registerLocale(language, translates[language]));
+    }, [languages]);
 
     // Period type
     React.useEffect(() => {
@@ -160,8 +171,8 @@ export const Calendar = React.forwardRef<any, Props>(
                 showTimeSelect={withTime}
                 showYearDropdown
                 scrollableYearDropdown
-                dateFormat={withTime ? `yyyy-MM-dd HH:mm` : `yyyy-MM-dd`}
-                placeholderText={startPlaceholder || withTime ? `yyyy-MM-dd HH:mm` : `yyyy-MM-dd`}
+                dateFormat={periodFormat}
+                placeholderText={startPlaceholder || withTime ? dateTimeFormatInput : dateFormatInput}
                 className={cn(`ebs-calendar`, { active: from })}
                 selected={from}
                 onChange={onChangeFrom}
@@ -178,11 +189,11 @@ export const Calendar = React.forwardRef<any, Props>(
                 showTimeSelect={withTime}
                 showYearDropdown
                 scrollableYearDropdown
-                dateFormat={withTime ? `yyyy-MM-dd HH:mm` : `yyyy-MM-dd`}
+                dateFormat={periodFormat}
                 minDate={from || minDate}
                 minTime={limitTime.min}
                 maxTime={limitTime.max}
-                placeholderText={endPlaceholder || withTime ? `yyyy-MM-dd HH:mm` : `yyyy-MM-dd`}
+                placeholderText={endPlaceholder || withTime ? dateTimeFormatInput : dateFormatInput}
                 className={cn(`ebs-calendar`, { active: to })}
                 selected={to}
                 onChange={onChangeTo}
@@ -202,9 +213,10 @@ export const Calendar = React.forwardRef<any, Props>(
               ref={ref}
               showYearDropdown
               scrollableYearDropdown
+              dateFormat={dateFormatInput}
               minDate={minDate}
               className={cn(`ebs-calendar`, { active: date })}
-              placeholderText={placeholder || withTime ? `yyyy-MM-dd HH:mm` : `yyyy-MM-dd`}
+              placeholderText={placeholder || dateFormatInput}
               selected={date}
               onChange={onChangeDate}
               locale={locale}
@@ -218,10 +230,11 @@ export const Calendar = React.forwardRef<any, Props>(
               showTimeSelect
               showYearDropdown
               scrollableYearDropdown
+              dateFormat={dateTimeFormatInput}
               minDate={minDate}
               minTime={limitTime.min}
               maxTime={limitTime.max}
-              placeholderText={placeholder || withTime ? `yyyy-MM-dd HH:mm` : `yyyy-MM-dd`}
+              placeholderText={placeholder || dateTimeFormatInput}
               className={cn(`ebs-calendar`, { active: date })}
               selected={date}
               onChange={onChangeDate}

@@ -152,10 +152,12 @@
         display: none;
       }
 
-      &__time-list-item--selected,
-      &__time-list-item--selected:hover {
-        background-color: $primary-color;
-        color: $white;
+      &__time {
+        &-container &-box &-list &-list-item--selected,
+        &-container &-box &-list &-list-item--selected:hover {
+          background-color: $primary-color;
+          color: $white;
+        }
       }
 
       &__navigation {
