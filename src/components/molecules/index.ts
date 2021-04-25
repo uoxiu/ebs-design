@@ -1,5 +1,6 @@
 export { Loader } from './Loader/Loader';
 export { Calendar } from './Calendar/Calendar';
+export { DatePicker } from './DatePicker/DatePicker';
 export { InputPhone } from './InputPhone/InputPhone';
 export { InputSearch } from './InputSearch/InputSearch';
 export { Checkbox } from './Checkbox/Checkbox';
@@ -11,3 +12,4 @@ export { Stepper } from './Stepper/Stepper';
 export { Textarea } from './Textarea/Textarea';
 export { Upload } from './Upload/Upload';
 export { NotifyContainer, NotifyContext, NotifyProvider } from './Notify/Notify';
+export { Select } from './Select/Select';
