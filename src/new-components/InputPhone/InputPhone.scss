@@ -1,0 +1,77 @@
+@import '~react-phone-input-2/lib/style.css';
+
+.ebs-input__phone {
+  &.active .form-control,
+  &.active .flag-dropdown {
+    border-color: $primary-color;
+    background-color: $white;
+    color: $heading-color;
+  }
+
+  &.disabled .form-control,
+  &.disabled .flag-dropdown {
+    border-color: $grey-500;
+    background-color: $white;
+    color: $grey-500;
+    cursor: not-allowed;
+
+    @include placeholder {
+      color: $grey-500;
+    }
+  }
+
+  &.has-error .form-control,
+  &.has-error .flag-dropdown {
+    border-color: $danger-color;
+    background-color: $white;
+  }
+
+  &-dropdown.country-list {
+    padding: rem(4px);
+    @include hiddenScroll;
+    @include elevation-2;
+    border-radius: rem($border-radius);
+
+    .country {
+      font-size: rem(14px);
+      color: $text-color;
+      padding: rem(6px);
+      @include fontRegular;
+    }
+
+    .country.highlight,
+    .country:hover,
+    .country[aria-selected='true'] {
+      background-color: $primary-000;
+      border-radius: rem($border-radius);
+    }
+
+    .country[aria-selected='true'] {
+      color: $primary-color;
+
+      .dial-code {
+        color: $primary-400;
+      }
+    }
+
+    .country .dial-code {
+      color: $text-color-secondary;
+    }
+  }
+
+  .form-control {
+    width: 100%;
+    border-radius: rem($border-radius);
+    height: rem($base-size);
+
+    @include placeholder {
+      color: $text-color-secondary;
+    }
+  }
+
+  .form-control,
+  .flag-dropdown {
+    border: 1px solid $border-color;
+    background-color: $white;
+  }
+}

@@ -1,0 +1,139 @@
+$tooltip-bg-color: #fff !default;
+$tooltip-border-color: $border-color !default;
+$tooltip-border-width: 1px !default;
+$tooltip-border: $tooltip-border-width solid $tooltip-border-color !default;
+$tooltip-padding-x: 10px !default;
+$tooltip-padding-y: 5px !default;
+
+.ebs-tooltip {
+  // Trigger
+  &__trigger {
+    display: inline-block;
+  }
+
+  // Container
+  &__container {
+    background-color: $tooltip-bg-color;
+    border-radius: $border-radius;
+    border: $tooltip-border;
+    box-shadow: $box-shadow;
+    color: $text-color;
+    font-weight: 400;
+    font-size: $font-size-base;
+    display: flex;
+    flex-direction: column;
+    padding: $tooltip-padding-y $tooltip-padding-x;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 9999;
+
+    &[data-popper-interactive='false'] {
+      pointer-events: none;
+    }
+
+    // Popper placement
+    &[data-popper-placement*='bottom'] .ebs-tooltip__arrow {
+      left: 0;
+      margin-top: -0.4rem;
+      top: 0;
+
+      &::before {
+        border-color: transparent transparent $tooltip-border-color transparent;
+        border-width: 0 0.5rem 0.4rem 0.5rem;
+        position: absolute;
+        top: -1px;
+      }
+
+      &::after {
+        border-color: transparent transparent $tooltip-bg-color transparent;
+        border-width: 0 0.5rem 0.4rem 0.5rem;
+      }
+    }
+
+    &[data-popper-placement*='top'] .ebs-tooltip__arrow {
+      bottom: 0;
+      left: 0;
+      margin-bottom: -1rem;
+
+      &::before {
+        border-color: $tooltip-border-color transparent transparent transparent;
+        border-width: 0.4rem 0.5rem 0 0.5rem;
+        position: absolute;
+        top: 1px;
+      }
+
+      &::after {
+        border-color: $tooltip-bg-color transparent transparent transparent;
+        border-width: 0.4rem 0.5rem 0 0.5rem;
+      }
+    }
+
+    &[data-popper-placement*='right'] .ebs-tooltip__arrow {
+      left: 0;
+      margin-left: -0.7rem;
+
+      &::before {
+        border-color: transparent $tooltip-border-color transparent transparent;
+        border-width: 0.5rem 0.4rem 0.5rem 0;
+      }
+
+      &::after {
+        border-color: transparent $tooltip-bg-color transparent transparent;
+        border-width: 0.5rem 0.4rem 0.5rem 0;
+        left: 6px;
+        top: 0;
+      }
+    }
+
+    &[data-popper-placement*='left'] .ebs-tooltip__arrow {
+      margin-right: -0.7rem;
+      right: 0;
+
+      &::before {
+        border-color: transparent transparent transparent $tooltip-border-color;
+        border-width: 0.5rem 0 0.5rem 0.4em;
+      }
+
+      &::after {
+        border-color: transparent transparent transparent $tooltip-bg-color;
+        border-width: 0.5rem 0 0.5rem 0.4em;
+        left: 3px;
+        top: 0;
+      }
+    }
+  }
+
+  // Arrow
+  &__arrow {
+    height: 1rem;
+    position: absolute;
+    width: 1rem;
+    pointer-events: none;
+
+    &::before {
+      border-style: solid;
+      content: '';
+      display: block;
+      height: 0;
+      margin: auto;
+      width: 0;
+    }
+
+    &::after {
+      border-style: solid;
+      content: '';
+      display: block;
+      height: 0;
+      margin: auto;
+      position: absolute;
+      width: 0;
+    }
+  }
+
+  // Title
+  &__title {
+    color: $heading-color;
+    font-size: $font-size-base;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+}

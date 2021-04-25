@@ -1,0 +1,53 @@
+.ebs-actions {
+  // Overlay
+  &__overlay {
+    padding: 0;
+    min-width: rem($actions-tooltip-min-width);
+    max-height: rem($actions-tooltip-height);
+
+    .ebs-tooltip__title {
+      @include fontMedium;
+      font-size: rem($actions-tooltip-title-font-size);
+      padding: rem($actions-tooltip-title-padding);
+      border-bottom: 1px solid $border-color;
+      color: $actions-tooltip-title-color;
+    }
+  }
+
+  // Items
+  &__items {
+    overflow: hidden auto;
+  }
+
+  // Item
+  &__item {
+    @include fontMedium;
+    cursor: pointer;
+    position: relative;
+    padding: rem($actions-tooltip-item-padding);
+    font-size: rem($actions-tooltip-item-font-size);
+    transition: $transition-time;
+
+    &:hover {
+      background-color: $background-content;
+      color: $link-hover-color;
+    }
+
+    .loader-display {
+      display: inline-block;
+      margin-right: rem($gutter-size / 2);
+      vertical-align: middle;
+    }
+  }
+
+  // Icon
+  &__icon {
+    cursor: pointer;
+    display: block;
+    color: $text-color;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}

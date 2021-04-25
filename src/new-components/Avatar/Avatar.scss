@@ -1,0 +1,153 @@
+.ebs-avatar {
+  @include flex-center;
+  position: relative;
+  border-radius: $border-radius;
+
+  &--circle,
+  &--circle &__img {
+    border-radius: 50%;
+  }
+
+  &--regular {
+    color: $primary-color;
+    background-color: $grey-100;
+
+    .ebs-icon {
+      color: $primary-color;
+    }
+  }
+
+  &--primary {
+    color: $white;
+    background-color: $primary-color;
+
+    .ebs-icon {
+      color: $white;
+    }
+  }
+
+  &--light {
+    color: $text-color;
+    background-color: $white;
+
+    .ebs-icon {
+      color: $text-color;
+    }
+  }
+
+  &--small {
+    min-width: $avatar-size-small;
+    width: $avatar-size-small;
+    height: $avatar-size-small;
+  }
+
+  &--small &-short-alt {
+    font-size: $avatar-font-small;
+  }
+
+  &--big {
+    min-width: $avatar-size-big;
+    width: $avatar-size-big;
+    height: $avatar-size-big;
+  }
+
+  &--big &-short-alt {
+    font-size: $avatar-font-big;
+  }
+
+  &__short-alt {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    @include fontBold;
+    white-space: nowrap;
+  }
+
+  &__img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    border-radius: $border-radius;
+    object-fit: cover;
+  }
+
+  &__status {
+    position: absolute;
+    bottom: rem(-2.5px);
+    right: rem(-2.5px);
+    width: rem(10px);
+    height: rem(10px);
+    border: 2px solid #fff;
+    border-radius: 50%;
+
+    &--active {
+      background-color: $avatar-status-active;
+    }
+
+    &--regular {
+      background-color: $primary-color;
+    }
+
+    &--inactive {
+      background-color: $avatar-status-uanctive;
+    }
+  }
+
+  &__card {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f9f9f9;
+    border: 1px solid #dfddd6;
+    border-radius: $border-radius;
+
+    &-alt {
+      color: #333;
+      padding: rem(0 $gutter-size / 2);
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+      @include fontMedium;
+      font-size: rem(9px);
+    }
+
+    img {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .ebs-avatar {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      height: rem(23px);
+      width: rem(23px);
+    }
+  }
+
+  &__inline {
+    display: flex;
+    align-items: center;
+    text-align: left;
+
+    &--reversed &-alt {
+      margin-left: 0;
+      margin-right: $gutter-size;
+    }
+
+    &-alt {
+      margin-left: $gutter-size;
+      @include fontSemiBold;
+      font-size: rem(12px);
+      color: $black;
+    }
+
+    &--light &-alt {
+      color: $white;
+    }
+
+    &-description {
+      font-size: rem(10px);
+      color: $avatar-description-color;
+    }
+  }
+}

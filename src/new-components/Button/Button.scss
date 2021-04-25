@@ -1,0 +1,193 @@
+@mixin btn-shadow($color) {
+  box-shadow: 0 3px 5px -1px rgba($color, 0.2);
+}
+@mixin btn-loader($color: $white) {
+  border-color: $color;
+  border-top-color: transparent;
+}
+@mixin btn-type($color, $text-color: $white) {
+  border-color: $color;
+  background-color: $color;
+  color: $text-color;
+}
+
+// Button
+.ebs-btn {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  font-family: $btn-font-family;
+  font-size: rem($btn-font-size);
+  font-weight: $btn-font-weight;
+  line-height: $btn-line-height;
+  border-radius: rem($btn-border-radius);
+  transition: $transition-base;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border: 1px solid transparent;
+  outline: none;
+  box-shadow: none;
+  text-decoration: none;
+  text-align: center;
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  // SVG icons
+  svg {
+    vertical-align: text-top;
+  }
+
+  svg,
+  &:hover svg {
+    color: inherit;
+  }
+
+  &__text {
+    line-height: $btn-line-height;
+  }
+
+  &--prefix {
+    display: flex;
+    align-items: center;
+
+    .ebs-btn__icon {
+      line-height: 1;
+      margin-right: rem(10px);
+    }
+  }
+
+  &--block {
+    width: 100%;
+    display: block;
+  }
+
+  // Loader
+  &__loading {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: rem($border-radius);
+    pointer-events: none;
+
+    & + .ebs-btn__text {
+      opacity: 0;
+    }
+  }
+
+  .ebs-loader__spinner {
+    position: absolute;
+    left: calc(50% - 7.5px);
+    top: calc(50% - 7.5px);
+    transform: translate(-50%, -50%);
+
+    @include btn-loader($white);
+  }
+
+  // button type (Color)
+  &--primary {
+    @include btn-type($primary-color, $white);
+    @include btn-shadow($primary-color);
+
+    @include hover-state {
+      @include btn-type($primary-600, $white);
+    }
+  }
+
+  &--dark {
+    @include btn-type($black, $white);
+    @include btn-shadow($black);
+
+    @include hover-state {
+      @include btn-type(lighten($black, 25%));
+    }
+  }
+
+  &--fill {
+    @include btn-type($primary-100, $primary-color);
+    @include btn-shadow($primary-300);
+
+    @include hover-state {
+      @include btn-type($primary-color, $white);
+      @include btn-shadow($primary-color);
+    }
+  }
+
+  &--ghost {
+    @include btn-type($btn-type-ghost-border-color, $btn-type-ghost-color);
+    @include btn-shadow($btn-type-ghost-background);
+    background-color: $btn-type-ghost-background;
+
+    @include hover-state {
+      @include btn-type($btn-type-ghost-hover-border-color, $btn-type-ghost-hover-color);
+      background-color: $btn-type-ghost-hover-background;
+    }
+
+    .ebs-loader__spinner {
+      @include btn-loader($btn-type-ghost-border-color);
+    }
+  }
+
+  &--text {
+    @include btn-type(transparent, $primary-color);
+
+    @include hover-state {
+      @include btn-type(transparent, $primary-600);
+    }
+
+    .ebs-loader__spinner {
+      @include btn-loader($primary-color);
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    @include btn-type($border-color, $grey-500);
+  }
+
+  // button size
+  &--large {
+    border-radius: $btn-border-radius-lg;
+    padding: rem($btn-padding-y-lg $btn-padding-x-lg);
+    font-weight: $btn-font-weight-lg;
+    font-size: rem($btn-font-size-lg);
+  }
+  &--medium {
+    border-radius: $btn-border-radius;
+    padding: rem($btn-padding-y $btn-padding-x);
+    font-weight: $btn-font-weight;
+    font-size: rem($btn-font-size);
+  }
+  &--small {
+    border-radius: $btn-border-radius-sm;
+    padding: rem($btn-padding-y-sm $btn-padding-x-sm);
+    font-weight: $btn-font-weight-sm;
+    font-size: rem($btn-font-size-sm);
+    line-height: $btn-line-height-sm;
+  }
+
+  &__group {
+    display: flex;
+    flex-wrap: wrap;
+
+    .ebs-btn {
+      &:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      &:not(:first-child):not(:last-child) {
+        border-radius: 0;
+      }
+      &:not(:last-child) {
+        border-right: none;
+      }
+      &:last-child {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
+}
